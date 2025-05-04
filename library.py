@@ -15,34 +15,33 @@ class Book:
 
     def getID(self):
         return self.__id
-    
+
     def available(self):
         return self.availability
-    
-    def availablityTrue(self):
-        self.availability = True
 
-    def availablityFalse(self):
-        self.availability = False
+    def borrow_book(self):
+        if self.availability:
+            self.availability = False
+            print("Here is your book, Thank You!")
+        else:
+            print("This book is not available!")
+
+    def return_book(self):
+        self.availability = True
+        print("Thank You! Please come again.")
 
     def __repr__(self):
-        return f'Book ID: {self.__id}, Name: {self.__name}, Author: {self.__author}, Availability: {self.availability}'
+        return f'Book ID: {self.__id}, Name: {self.__name}, Author: {self.__author}, Availability: {"Yes" if self.availability else "No"}'
+
 
 item = Library()
-book1 = Book(101, "Python Programming", "Jhankar Mahbub", True)
-book2 = Book(102, "Habulder Jonno Programming", "Jhankar Mahbub", True)
-book3 = Book(103, "Learn JavaScript", "Elliot Smith", True)
-book4 = Book(104, "Web Development Basics", "Angela Yu", True)
-book5 = Book(105, "Data Structures in C++", "Bjarne Stroustrup", True)
-book6 = Book(106, "Machine Learning Guide", "Andrew Ng", True)
-book7 = Book(107, "HTML & CSS Design", "Jon Duckett", True)
-item.entry_book(book1)
-item.entry_book(book2)
-item.entry_book(book3)
-item.entry_book(book4)
-item.entry_book(book5)
-item.entry_book(book6)
-item.entry_book(book7)
+item.entry_book(Book(101, "Python Programming", "Jhankar Mahbub", True))
+item.entry_book(Book(102, "Habulder Jonno Programming", "Jhankar Mahbub", True))
+item.entry_book(Book(103, "Learn JavaScript", "Elliot Smith", True))
+item.entry_book(Book(104, "Web Development Basics", "Angela Yu", True))
+item.entry_book(Book(105, "Data Structures in C++", "Bjarne Stroustrup", True))
+item.entry_book(Book(106, "Machine Learning Guide", "Andrew Ng", True))
+item.entry_book(Book(107, "HTML & CSS Design", "Jon Duckett", True))
 
 
 def viewBooks():
@@ -56,63 +55,51 @@ print("2. Borrow Books")
 print("3. Return Books")
 print("4. Exit")
 print("Enter Your Choice :")
+
 while True:
     n = int(input())
     if n == 1:
         print('\n')
         viewBooks()
-        print('\n')
-        print("1. View Books")
-        print("2. Borrow Books")
-        print("3. Return Books")
-        print("4. Exit")
-        print("Enter Your Choice :")
+
     elif n == 2:
         print("Enter Your Book ID :")
         x = int(input())
         matched_book = None
         for book in item.book_list:
-            if x == book.getID():
+            if book.getID() == x:
                 matched_book = book
                 break
-        if matched_book and matched_book.available():
-            matched_book.availablityFalse()
-            print("Here is your book, Thank You!")
+
+        if matched_book:
+            matched_book.borrow_book()
         else:
-            print("This book is not available!")
-            
-        print('\n')
-        print("1. View Books")
-        print("2. Borrow Books")
-        print("3. Return Books")
-        print("4. Exit")
-        print("Enter Your Choice :")
+            print("Book not found!")
 
     elif n == 3:
         print("Enter Your Book ID :")
         x = int(input())
         matched_book = None
         for book in item.book_list:
-            if x == book.getID():
+            if book.getID() == x:
                 matched_book = book
                 break
+
         if matched_book:
-            matched_book.availablityTrue()
-            print("Thank You! Please come again.")
+            matched_book.return_book()
         else:
             print("This is not our book. Thank You!")
-            
-        print('\n')
-        print("1. View Books")
-        print("2. Borrow Books")
-        print("3. Return Books")
-        print("4. Exit")
-        print("Enter Your Choice :")
 
-    else :
+    elif n == 4:
         break
+    else:
+        print("Invalid choice!")
 
+    print('\n')
+    print("1. View Books")
+    print("2. Borrow Books")
+    print("3. Return Books")
+    print("4. Exit")
+    print("Enter Your Choice :")
 
-
-
-print('\n\n')
+# finished the work!
