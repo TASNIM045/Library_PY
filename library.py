@@ -1,59 +1,84 @@
 class Library:
-    book_list = []
-    
-    def entry_book(self):
-        print("ok")
+    def __init__(self):
+        self.book_list = []
 
-class Book(Library):
-    def __init__(self,book_id,book_title,book_author,book_availablity):
-        self.__book_id = book_id
-        self.__book_title = book_title
-        self.__book_author = book_author
-        self.book_availablity = book_availablity
+    def entry_book(self, book):
+        self.book_list.append(book)
 
-        # self.entry_book()
+
+class Book:
+    def __init__(self, id, name, author, availability):
+        self.__id = id
+        self.__name = name
+        self.__author = author
+        self.availability = availability
 
     def getID(self):
-        return self.__book_id
+        return self.__id
 
-    
+    def __repr__(self):
+        return f'Book ID: {self.__id}, Name: {self.__name}, Author: {self.__author}, Availability: {self.availability}'
+
+item = Library()
+book1 = Book(101, "Python Programming", "Jhankar Mahbub", True)
+book2 = Book(102, "Habulder Jonno Programming", "Jhankar Mahbub", True)
+book3 = Book(103, "Learn JavaScript", "Elliot Smith", True)
+book4 = Book(104, "Web Development Basics", "Angela Yu", True)
+book5 = Book(105, "Data Structures in C++", "Bjarne Stroustrup", True)
+book6 = Book(106, "Machine Learning Guide", "Andrew Ng", True)
+book7 = Book(107, "HTML & CSS Design", "Jon Duckett", True)
+item.entry_book(book1)
+item.entry_book(book2)
+item.entry_book(book3)
+item.entry_book(book4)
+item.entry_book(book5)
+item.entry_book(book6)
+item.entry_book(book7)
+
+def viewBooks():
+    for book in item.book_list:
+        print(book)
 
 
-
-obj1 = Book(101,'Python Programing','Jhankar Mahbub',True)
-obj2 = Book(102,'C++','Abdul Kalam',True)
-obj3 = Book(103,'DSA','Makbul Hossain',True)
-obj4 = Book(104,'Physich','Misha Chowdhory',True)
-obj5 = Book(105,'Chemistry','Sakib Khan',True)
-obj6 = Book(106,'Dry Cake','Azad Bhaiya',True)
-obj7 = Book(107,'Ghi Toast','Kamal Khan',True)
-obj8 = Book(107,'Easy','Poster Man',True)
-books = Library()
-
-for i in range(1,9):
-    books.book_list.append(f'obj{i}')
-
-
-print("\n\n")
-print("------------Welcome To Our Library------------")
-print("1. Book List")
+print('\n\n')
+print("1. View Books")
 print("2. Borrow Books")
 print("3. Return Books")
-print("4. Exits")
-
-print("Please Enter Your choice : ") 
-
-
+print("4. Exit")
+print("Enter Your Choice :")
 while True:
     n = int(input())
-    if n is 1:
-        print(1)
-    elif n is 2:
-        print(2)
-    elif n is 3:
+    if n == 1:
+        print('\n')
+        viewBooks()
+        print('\n')
+        print("1. View Books")
+        print("2. Borrow Books")
+        print("3. Return Books")
+        print("4. Exit")
+        print("Enter Your Choice :")
+    elif n == 2:
+        print("Enter Your Book ID :")
+        x = int(input())
+        for book in item.book_list:
+            if x == book.getID():
+                print("Here is you book, Thank You!")
+                break
+            else :
+                print("This book is not availabel!")
+                break
+        print('n')
+        print("1. View Books")
+        print("2. Borrow Books")
+        print("3. Return Books")
+        print("4. Exit")
+        print("Enter Your Choice :")
+    elif n == 3:
         print(3)
-    else:
+    else :
         break
 
-print("\n\n")
 
+
+
+print('\n\n')
